@@ -18,6 +18,10 @@ require_once 'CRM/Core/Config.php';
 
 $config = CRM_Core_Config::singleton();
 
+//load bootstrap so that hooks can be invoked 
+//and also cms dependant apis can be used by civicrm
+CRM_Utils_System::loadBootStrap(CRM_Core_DAO::$_nullArray, FALSE, TRUE);
+
 /*
  * Get the password from the Payment Processor's table based on the DPS user id
  * being passed back from the server

@@ -34,8 +34,11 @@
 session_start();
 
 require_once '../civicrm.config.php';
-
 $config = CRM_Core_Config::singleton();
+
+//load bootstrap so that hooks can be invoked 
+//and also cms dependant apis can be used by civicrm
+CRM_Utils_System::loadBootStrap(CRM_Core_DAO::$_nullArray, FALSE, TRUE);
 
 $rawPostData = file_get_contents('php://input');
 CRM_Core_Payment_GoogleIPN::main($rawPostData);

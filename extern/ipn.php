@@ -39,6 +39,10 @@ require_once '../civicrm.config.php';
 
 $config = CRM_Core_Config::singleton();
 
+//load bootstrap so that hooks can be invoked 
+//and also cms dependant apis can be used by civicrm
+CRM_Utils_System::loadBootStrap(CRM_Core_DAO::$_nullArray, FALSE, TRUE);
+
 if (empty($_GET)) {
   $rpInvoiceArray = array();
   $rpInvoiceArray = explode('&', $_POST['rp_invoice_id']);
