@@ -41,6 +41,7 @@ $config = CRM_Core_Config::singleton();
 
 if (empty($_GET)) {
   $rpInvoiceArray = array();
+  $_POST['rp_invoice_id'] = "m=contribute&i=99b53352684a7d068e6657325c6e2e10&c=202&r=8&b=108&p=1";
   $rpInvoiceArray = explode('&', $_POST['rp_invoice_id']);
   foreach ($rpInvoiceArray as $rpInvoiceValue) {
     $rpValueArray = explode('=', $rpInvoiceValue);
