@@ -51,7 +51,6 @@ class CRM_Core_Invoke {
     try {
       return self::_invoke($args);
     }
-
     catch (Exception $e) {
       return CRM_Core_Error::handleUnhandledException($e);
     }
