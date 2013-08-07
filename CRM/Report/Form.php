@@ -3205,7 +3205,8 @@ LEFT JOIN civicrm_contact {$field['alias']} ON {$field['alias']}.id = {$this->_a
 
   static function uploadChartImage() {
     // upload strictly for '.png' images
-    if (preg_match('/\.png$/', trim($_GET['name']))) {
+    $name = CRM_Utils_Request::retrieve('name', 'String', CRM_Core_DAO::$_nullObject, FALSE, NULL, 'GET');
+    if (preg_match('/\.png$/', trim($name))) {
       //
       // POST data is usually string data, but we are passing a RAW .png
       // so PHP is a bit confused and $_POST is empty. But it has saved
@@ -3221,7 +3222,7 @@ LEFT JOIN civicrm_contact {$field['alias']} ON {$field['alias']}.id = {$this->_a
       }
 
       // full path to the saved image including filename
-      $destination = $defaultPath . basename($_GET['name']);
+      $destination = $defaultPath . basename($name);
 
       //write and save
       $jfh = fopen($destination, 'w') or die("can't open file");

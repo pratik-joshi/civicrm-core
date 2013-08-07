@@ -50,11 +50,10 @@
    cj( function( ) {
      buildChart( );
 
-     var resourceURL = "{/literal}{$config->userFrameworkResourceURL}{literal}";
      var uploadURL   = "{/literal}{$uploadURL|cat:$chartId}{literal}.png";
      var uploadDir   = "{/literal}{$config->imageUploadDir|replace:'/persist/contribute/':'/persist/'|cat:'openFlashChart/'}{literal}";
 
-     cj("input[id$='submit_print'],input[id$='submit_pdf']").bind('click', function(e){
+     cj("input[id$='submit_print'],input[id$='submit_pdf']").bind('click', function(){
      // image creator php file path and append image name
        var url = {/literal}'{crmURL p="civicrm/report/chart" q="name=`$chartId`.png"}'{literal};
        // append directory path
