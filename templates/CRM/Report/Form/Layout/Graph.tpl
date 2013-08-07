@@ -48,21 +48,21 @@
 {literal}
 <script type="text/javascript">
    cj( function( ) {
-      buildChart( );
+     buildChart( );
 
-      var resourceURL = "{/literal}{$config->userFrameworkResourceURL}{literal}";
-      var uploadURL   = "{/literal}{$uploadURL|cat:$chartId}{literal}.png";
-      var uploadDir   = "{/literal}{$config->imageUploadDir|replace:'/persist/contribute/':'/persist/'|cat:'openFlashChart/'}{literal}";
+     var resourceURL = "{/literal}{$config->userFrameworkResourceURL}{literal}";
+     var uploadURL   = "{/literal}{$uploadURL|cat:$chartId}{literal}.png";
+     var uploadDir   = "{/literal}{$config->imageUploadDir|replace:'/persist/contribute/':'/persist/'|cat:'openFlashChart/'}{literal}";
 
-      cj("input[id$='submit_print'],input[id$='submit_pdf']").bind('click', function(){
-        var url = resourceURL +'packages/OpenFlashChart/php-ofc-library/ofc_upload_image.php';  // image creator php file path
-           url += '?name={/literal}{$chartId}{literal}.png';                                    // append image name
-           url += '&defaultPath=' + uploadDir;                                                  // append directory path
-
-        //fetch object
-        swfobject.getObjectById("open_flash_chart_{/literal}{$uniqueId}{literal}").post_image( url, true, false );
-        });
-    });
+     cj("input[id$='submit_print'],input[id$='submit_pdf']").bind('click', function(e){
+     // image creator php file path and append image name
+       var url = {/literal}'{crmURL p="civicrm/report/chart" q="name=`$chartId`.png"}'{literal};
+       // append directory path
+       url += '&defaultPath=' + uploadDir;
+       //fetch object
+       swfobject.getObjectById("open_flash_chart_{/literal}{$uniqueId}{literal}").post_image( url, true, false );
+     });
+   });
 
   function buildChart( ) {
      var chartData = {/literal}{$openFlashChartData}{literal};

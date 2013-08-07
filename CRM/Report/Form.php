@@ -3202,5 +3202,31 @@ LEFT JOIN civicrm_contact {$field['alias']} ON {$field['alias']}.id = {$this->_a
       }
     }
   }
-}
 
+  static function uploadChartImage() {
+    if (preg_match('/\.png$/', trim($_GET['name']))) {
+      //
+      // POST data is usually string data, but we are passing a RAW .png
+      // so PHP is a bit confused and $_POST is empty. But it has saved
+      // the raw bits into $HTTP_RAW_POST_DATA
+      //
+      $httpRawPostData = $GLOBALS['HTTP_RAW_POST_DATA'];
+      if($_GET['defaultPath']) {
+        $defaultPath = $_GET['defaultPath'];
+      }
+
+      if (!file_exists($defaultPath)) {
+        mkdir($defaultPath, 0777, TRUE);
+      }
+
+      // full path to the saved image including filename
+      $destination = $defaultPath . basename($_GET['name']);
+
+      //write and save
+      $jfh = fopen($destination, 'w') or die("can't open file");
+      fwrite($jfh, $httpRawPostData);
+      fclose($jfh);
+      CRM_Utils_System::civiExit();
+    }
+  }
+}
