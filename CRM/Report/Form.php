@@ -3204,6 +3204,7 @@ LEFT JOIN civicrm_contact {$field['alias']} ON {$field['alias']}.id = {$this->_a
   }
 
   static function uploadChartImage() {
+    // upload strictly for '.png' images
     if (preg_match('/\.png$/', trim($_GET['name']))) {
       //
       // POST data is usually string data, but we are passing a RAW .png
