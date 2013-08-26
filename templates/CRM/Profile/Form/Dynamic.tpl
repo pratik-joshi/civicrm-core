@@ -48,6 +48,11 @@ function checkResponse(responseText, statusText, xhr, $form) {
   if (!cj(responseText).find('.crm-error').html()) {
     window.location = '{/literal}{$postUrl}{literal}';
   }
+  else {
+    // display the error message - 
+    // useful in the case of validate hooks
+    $form.prepend(cj(responseText).find('.crm-error').html());
+  }
 } 
 </script>
 {/literal}
