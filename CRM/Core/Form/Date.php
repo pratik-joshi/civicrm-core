@@ -93,19 +93,20 @@ Class CRM_Core_Form_Date {
     &$form, $fieldName, $count = 1,
     $from = '_from', $to = '_to', $fromLabel = 'From:',
     $required = FALSE, $operators = array(),
-    $dateFormat = 'searchDate', $displayTime = FALSE
+    $dateFormat = 'searchDate', $displayTime = FALSE,
+    $dateAttributes = array()
   ) {
     $selector =
       CRM_Core_Form_Date::returnDateRangeSelector(
         $form, $fieldName, $count,
         $from, $to, $fromLabel,
         $required, $operators,
-        $dateFormat, $displayTime
+        $dateFormat, $displayTime, $dateAttributes
       );
     CRM_Core_Form_Date::addDateRangeToForm(
       $form, $fieldName, $selector,
       $from, $to, $fromLabel,
-      $required, $dateFormat, $displayTime
+      $required, $dateFormat, $displayTime, $dateAttributes
     );
   }
 
@@ -208,7 +209,7 @@ Class CRM_Core_Form_Date {
    * @param boolean $displayTime
    * @return null
    */
-  static function addDateRangeToForm(&$form, $fieldName, $selector, $from = '_from', $to = '_to', $fromLabel = 'From:', $required = FALSE, $dateFormat = 'searchDate', $displayTime = FALSE) {
+  static function addDateRangeToForm(&$form, $fieldName, $selector, $from = '_from', $to = '_to', $fromLabel = 'From:', $required = FALSE, $dateFormat = 'searchDate', $displayTime = FALSE, $dateAttributes = array()) {
     $form->add('select',
       "{$fieldName}_relative",
       ts('Relative Date Range'),
@@ -216,7 +217,7 @@ Class CRM_Core_Form_Date {
         $required
       );
 
-      $form->addDateRange($fieldName, $from, $to, $fromLabel, $dateFormat, FALSE, $displayTime);
+    $form->addDateRange($fieldName, $from, $to, $fromLabel, $dateFormat, FALSE, $displayTime, $dateAttributes);
   }
 
 }

@@ -835,13 +835,21 @@ class CRM_Core_Form extends HTML_QuickForm_Page {
     $this->addButtons($buttons);
   }
 
-  function addDateRange($name, $from = '_from', $to = '_to', $label = 'From:', $dateFormat = 'searchDate', $required = FALSE, $displayTime = FALSE) {
+  function addDateRange($name, $from = '_from', $to = '_to', $label = 'From:', $dateFormat = 'searchDate', $required = FALSE, $displayTime = FALSE, $dateAttributes = array()) {
     if ($displayTime) {
-      $this->addDateTime($name . $from, $label, $required, array('formatType' => $dateFormat));
-      $this->addDateTime($name . $to, ts('To:'), $required, array('formatType' => $dateFormat));
+      $this->addDateTime($name . $from, $label, $required, array('formatType' => $dateFormat,
+          'startOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes),
+          'endOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes)));
+      $this->addDateTime($name . $to, ts('To:'), $required, array('formatType' => $dateFormat,
+          'startOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes),
+          'endOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes)));
     } else {
-      $this->addDate($name . $from, $label, $required, array('formatType' => $dateFormat));
-      $this->addDate($name . $to, ts('To:'), $required, array('formatType' => $dateFormat));
+      $this->addDate($name . $from, $label, $required, array('formatType' => $dateFormat,
+          'startOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes),
+          'endOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes)));
+      $this->addDate($name . $to, ts('To:'), $required, array('formatType' => $dateFormat,
+          'startOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes),
+          'endOffset' => CRM_Utils_Array::value('startOffset', $dateAttributes)));
     }
   }
 
