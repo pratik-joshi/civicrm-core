@@ -603,6 +603,15 @@ class CRM_Activity_Form_Activity extends CRM_Contact_Form_Task {
       return;
     }
 
+    if (!$this->_single && !empty($this->_contactIds)) {
+      $withArray = array();
+      foreach ($this->_contactIds as $contactId) {
+        $withDisplayName = self::_getDisplayNameById($contactId);
+        $withArray[] = "\"$withDisplayName\" ";
+      }
+      $this->assign('with', implode(', ', $withArray));
+    }
+
     if ($this->_cdType) {
       return CRM_Custom_Form_CustomData::buildQuickForm($this);
     }

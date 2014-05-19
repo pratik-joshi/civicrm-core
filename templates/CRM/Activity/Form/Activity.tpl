@@ -79,6 +79,13 @@
 
   <tr class="crm-activity-form-block-target_contact_id">
       <td class="label">{$form.target_contact_id.label}</td>
+      {if $single eq false}
+      <td class="view-value" style="white-space: normal">
+        {$with|escape}
+        <br/>
+        {$form.is_multi_activity.html}&nbsp;{$form.is_multi_activity.label} {help id="id-is_multi_activity"}
+      </td>
+      {else}
       <td class="view-value">
         {$form.target_contact_id.html}
         {if $action eq 1}
@@ -86,6 +93,7 @@
         {$form.is_multi_activity.html}&nbsp;{$form.is_multi_activity.label} {help id="id-is_multi_activity"}
         {/if}
       </td>
+      {/if}
   </tr>
 
   <tr class="crm-activity-form-block-assignee_contact_id">
